@@ -2,7 +2,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <section className="align-items-center bg-img-fixed header">
+    <section className="align-items-center bg-img-fixed header2">
             <div className="container">
                 <div className="slogan2">
                     <h1>Are you a new client?</h1>

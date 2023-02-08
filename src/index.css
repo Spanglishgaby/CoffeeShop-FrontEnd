@@ -217,7 +217,7 @@ color: var(--white);
   height: 100%;
   width: 100%;
 }
-.header{
+.header2{
 background-image: url("https://images.unsplash.com/photo-1510682999913-847a6d3cf221");
 background-position:center;
 background-size: cover;
@@ -302,4 +302,22 @@ transition: all 200ms ease-in-out;
 }
 .fab:hover {
 top: -5px;
+}
+/* menucontainer */
+.menu-cards{
+margin: 50px;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+justify-content: center;
+align-items: baseline;
+justify-items: center;
+}
+.menu-container{
+margin: 100px;
+background: #FFFFFF;
+color: #000000;
+border-radius: 0px;
+border: 2px solid #FF9408;
+text-align: center;
+
 }
