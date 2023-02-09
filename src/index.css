@@ -248,7 +248,6 @@ background-color: #020202;
 }
 
 .slogan2 button {
-padding: 1rem 2rem;
 outline: none;
 border: none;
 background-color: var(--secon-color);
@@ -265,6 +264,9 @@ right: 13rem;
 .slogan2 button:hover {
 background-color: black;
 color: var(--white);
+}
+.login-form-button {
+  width: 80%;
 }
 /* Footer */
 .footer{
@@ -320,4 +322,7 @@ border-radius: 0px;
 border: 2px solid #FF9408;
 text-align: center;
 
+}
+.BtnShop{
+  
 }

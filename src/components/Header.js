@@ -1,13 +1,12 @@
 import React from 'react'
+import Newcustomer from './Newcustomer'
 
 const Header = () => {
   return (
     <section className="align-items-center bg-img-fixed header2">
             <div className="container">
                 <div className="slogan2">
-                    <h1>Are you a new client?</h1>
-                    {/* <h2>Are you a new client?</h2> */}
-                    <button>Register Here!</button>
+                    <Newcustomer/>
                 </div>
             </div>
     </section>
