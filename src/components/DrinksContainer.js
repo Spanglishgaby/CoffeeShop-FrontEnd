@@ -1,10 +1,18 @@
 import {useState} from 'react'
 import { Button,Card } from 'semantic-ui-react'
 import DrinkUpdate from './DrinkUpdate';
+import IngredientModal from './IngredientModal';
 import NewDrinkModal from './NewDrinkModal';
 
-const DrinksContainer = ({drinks, setDrinks}) => {
+const DrinksContainer = ({drinks, setDrinks,ingredients,setIngredients}) => {
   const [showForm, setShowForm] = useState({});
+  const [drinkIngredients, setdrinkIngredients] =useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:9292/drink-ingredients")
+    .then(res => res.json())
+    .then((data) => setdrinkIngredients(data))
+  }, [])
 
   const handleDelete = (id) =>
     setDrinks((current) => current.filter((p) => p.id !== id));
@@ -49,7 +57,9 @@ const DrinksContainer = ({drinks, setDrinks}) => {
   <>
     <div className='menu-container'>
       <h1>Drink's List</h1>
-      <NewDrinkModal  drinks={drinks} setDrinks={setDrinks} />
+      <NewDrinkModal  drinks={drinks} setDrinks={setDrinks} 
+      drinkIngredients={drinkIngredients} setdrinkIngredients={setdrinkIngredients} />
+      <IngredientModal ingredients={ingredients} setIngredients={setIngredients}/>
       <div className='menu-cards'>
         {drinksArray}
       </div>

@@ -2,7 +2,7 @@ import { Modal, Form, Input,message,Button} from 'antd';
 import { useState } from 'react';
 
 
-const NewDrinkModal = ({drinks, setDrinks}) => {
+const NewDrinkModal = ({drinks, setDrinks,drinkIngredients, setdrinkIngredients}) => {
     const [openSignup, setOpenSignup] = useState(false)
     const [newDrink, setNewDrink] = useState({
         name: "",
@@ -19,8 +19,8 @@ const NewDrinkModal = ({drinks, setDrinks}) => {
     }
 
     function handleChange1(e) {
-      e.preventDefault()
-      setNewDrink({
+        e.preventDefault()
+        setNewDrink({
             ...newDrink, [e.target.name]:e.target.value
         })
     }

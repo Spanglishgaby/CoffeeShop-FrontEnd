@@ -18,7 +18,7 @@ const OrdersContainer = ({orders,setOrders,customers}) => {
   }
   let orderArray = orders && orders.map((order) => {
     let customer = customers.find(customer => customer.id === order.customer_id)
-    console.log(customer)
+    
     return (
       <>
       <Card key={order.id}>

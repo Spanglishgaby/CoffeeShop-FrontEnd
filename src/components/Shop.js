@@ -18,7 +18,7 @@ const Shop = ({orders,setOrders, customers, drinks}) => {
     customer_id: customer_id,
     drink_id:drink_id,
     }
-    console.log(newOrder)
+
     function handleOpen() {
       setOpenSignup(true)
     }
@@ -27,7 +27,7 @@ const Shop = ({orders,setOrders, customers, drinks}) => {
     }
     useEffect(() => {
       const selectedDrink = drinks.find(drink => drink.id === drink_id)
-      console.log(selectedDrink)
+     
       if (selectedDrink) {
         setSelectedDrinkPrice(selectedDrink.price)
       }

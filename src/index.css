@@ -333,6 +333,7 @@ text-align: center;
 }
 
 .btnDrink{
+  margin: 20px;
 color: #000000;
 background-color: #f4a261;
 border: solid #fa8124 2px;

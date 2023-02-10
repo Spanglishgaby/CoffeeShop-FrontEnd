@@ -4,7 +4,7 @@ import Shop from './Shop'
 
 const MenuContainer = ({drinks, orders,setOrders, customers}) => {
 
-    console.log(customers)
+    
   let drinksArray = drinks && drinks.map((drink) => {
     return (
       <Card key={drink.id}>
