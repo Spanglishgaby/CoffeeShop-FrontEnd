@@ -10,7 +10,7 @@ const Shop = ({orders,setOrders, customers, drinks}) => {
     const [total, setTotal] = useState("")
     const [customer_id, setCustomer_id] = useState("")
     const [drink_id, setDrink_id] = useState("")
-    const [selectedDrinkPrice, setSelectedDrinkPrice] = useState(0)
+    const [selectedDrinkPrice, setSelectedDrinkPrice] = useState(2.5)
 
     const newOrder ={
     order_time: formattedDate,

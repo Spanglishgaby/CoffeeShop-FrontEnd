@@ -5,7 +5,7 @@ import videoBg from './coffeelogo.png'
 import Footer from './Footer'
 
 
-const Mainpage = () => {
+const Mainpage = ({customers, setCustomers}) => {
   return (
     <div>
       <div id="address"> 776 3rd Ave, New York, NY 10017</div>
@@ -24,7 +24,7 @@ const Mainpage = () => {
       <section className="align-items-center bg-img-fixed header2">
         <div className="container">
           <div className="slogan2">
-            <Newcustomer/>
+            <Newcustomer customers={customers} setCustomers={setCustomers}/>
           </div>
         </div>
       </section>

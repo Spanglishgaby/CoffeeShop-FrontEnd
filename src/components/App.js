@@ -33,13 +33,22 @@ function App() {
     )
     }, [])
 
+    useEffect(() => {
+      fetch("http://localhost:9292/orders")
+      .then(res => res.json())
+      .then((data) => 
+      setOrders(data)
+      // Console.log(data)
+      )
+      }, [])
+
   return (
   <Routes>
     <Route path = '/' element={<LandingPage/>}/>
-    <Route path = '/mainpage' element={<Mainpage/>}>
+    <Route path = '/mainpage' element={<Mainpage customers={customers} setCustomers={setCustomers}/>}>
       <Route path = 'menu' element={<MenuContainer drinks={drinks} setOrders={setOrders} orders={orders} customers={customers}/>}/>
       <Route path = 'drinks' element={<DrinksContainer drinks={drinks} setDrinks={setDrinks} />}/>
-      <Route path = 'orders' element={<OrdersContainer orders={orders} setOrders={setOrders}/>}/>
+      <Route path = 'orders' element={<OrdersContainer orders={orders} setOrders={setOrders} customers={customers} setCustomers={setCustomers}/>}/>
     </Route>
   </Routes>
   );

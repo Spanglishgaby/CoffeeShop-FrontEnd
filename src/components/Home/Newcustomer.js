@@ -1,34 +1,44 @@
 import { Button, Modal, Form, Input,message } from 'antd';
 import { useState } from 'react';
 
-const Newcustomer = () => {
+const Newcustomer = ({customers, setCustomers}) => {
     const [openSignup, setOpenSignup] = useState(false)
-    const [newUser, setNewUser] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        address:"",
+    const [newCustomer, setNewCustomer] = useState({
+      name: "",
+      email: "",
+      phone: "",
+      address:"",
     })
 
     function handleOpen() {
-        setOpenSignup(true)
+      setOpenSignup(true)
     }
     function handleClose() {
-        setOpenSignup(false)
+      setOpenSignup(false)
     }
 
     function handleSubmit() {
-        console.log("successfully")
-        success()
+      fetch("http://localhost:9292/customers", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newCustomer)
+      })
+      .then((r) => r.json())
+      .then((data) => {
+          setCustomers([...customers, data]);
+          setOpenSignup(false)
+          success()
+      })
     }
+    
 
     const success = () => {
         message.success('Welcome to the coffee shop!');
     };
     function handleInputChange(e) {
-        setNewUser({
-            ...newUser, [e.target.name]:e.target.value
-        })
+      setNewCustomer({
+        ...newCustomer, [e.target.name]:e.target.value
+      })
     }
 
 

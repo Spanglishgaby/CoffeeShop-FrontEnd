@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import { Button, Form,Card,Image } from 'semantic-ui-react'
+import { Button,Card } from 'semantic-ui-react'
 import DrinkUpdate from './DrinkUpdate';
 import NewDrinkModal from './NewDrinkModal';
 
@@ -49,7 +49,7 @@ const DrinksContainer = ({drinks, setDrinks}) => {
   <>
     <div className='menu-container'>
       <h1>Drink's List</h1>
-      <NewDrinkModal drinks={drinks} setDrinks={setDrinks} />
+      <NewDrinkModal  drinks={drinks} setDrinks={setDrinks} />
       <div className='menu-cards'>
         {drinksArray}
       </div>
