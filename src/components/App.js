@@ -1,35 +1,47 @@
-import { useState } from 'react';
-import {Switch, Route} from 'react-router-dom'
-import LandingPage from './LandingPage';
-import Mainpage from './Mainpage';
-import NewDrinks from './NewDrinks';
+import { useState,useEffect } from 'react';
+import { Routes, Route } from "react-router-dom";
+import DrinksContainer from './DrinksContainer';
+import LandingPage from './Home/LandingPage';
+import Mainpage from './Home/Mainpage';
 import OrdersContainer from './OrdersContainer';
+import MenuContainer from './MenuContainer';
+
 function App() {
   const [drinks, setDrinks] =useState([])
   const [orders, setOrders] =useState([])
-  // const [users, setusers] =useState([])
-  // fetch("http://localhost:9292/drinks")
-  // .then(r => r.json())
-  // .then(bubbleTeas => {
-  // console.log(bubbleTeas)
-  // })
+  const [customers, setCustomers] =useState([])
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("http://localhost:9292/drinks");
+        const data = await res.json();
+        setDrinks(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:9292/customers")
+    .then(res => res.json())
+    .then((data) => 
+    setCustomers(data)
+    // Console.log(data)
+    )
+    }, [])
 
   return (
-  <Switch>
-    <Route exact path = '/'>
-    <LandingPage/>
+  <Routes>
+    <Route path = '/' element={<LandingPage/>}/>
+    <Route path = '/mainpage' element={<Mainpage/>}>
+      <Route path = 'menu' element={<MenuContainer drinks={drinks} setOrders={setOrders} orders={orders} customers={customers}/>}/>
+      <Route path = 'drinks' element={<DrinksContainer drinks={drinks} setDrinks={setDrinks} />}/>
+      <Route path = 'orders' element={<OrdersContainer orders={orders} setOrders={setOrders}/>}/>
     </Route>
-    <Route exact path = '/mainpage'>
-    <Mainpage drinks={drinks} setDrinks={setDrinks}/>
-    </Route>
-    <Route exact path = '/drinks'>
-    <NewDrinks drinks={drinks} setDrinks={setDrinks}/>
-    </Route>
-    <Route exact path = '/orders'>
-    <OrdersContainer orders={orders} setOrders={setOrders}/>
-    </Route>
-  </Switch>
+  </Routes>
   );
 }
 

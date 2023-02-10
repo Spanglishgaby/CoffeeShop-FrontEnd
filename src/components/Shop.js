@@ -1,36 +1,49 @@
-import { Modal, Form, Input,message, Select,Radio } from 'antd';
-import { Button, Icon } from 'semantic-ui-react'
-import { useState } from 'react';
-const { Option } = Select;
+import { Modal,Radio,Descriptions} from 'antd';
+import { Button, Icon,Form, } from 'semantic-ui-react'
+import { useState,useEffect } from 'react';
+import moment from 'moment';
 
-const Shop = () => {
+const formattedDate = moment().format('YYYY-MM-DD HH:mm');
+
+const Shop = ({orders,setOrders, customers, drinks}) => {
     const [openSignup, setOpenSignup] = useState(false)
-    const [newUser, setNewUser] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        address:"",
-    })
+    const [total, setTotal] = useState("")
+    const [customer_id, setCustomer_id] = useState("")
+    const [drink_id, setDrink_id] = useState("")
+    const [selectedDrinkPrice, setSelectedDrinkPrice] = useState(0)
 
+    const newOrder ={
+    order_time: formattedDate,
+    total: total,
+    customer_id: customer_id,
+    drink_id:drink_id,
+    }
+    console.log(newOrder)
     function handleOpen() {
-        setOpenSignup(true)
+      setOpenSignup(true)
     }
     function handleClose() {
-        setOpenSignup(false)
+      setOpenSignup(false)
     }
+    useEffect(() => {
+      const selectedDrink = drinks.find(drink => drink.id === drink_id)
+      console.log(selectedDrink)
+      if (selectedDrink) {
+        setSelectedDrinkPrice(selectedDrink.price)
+      }
+    }, [drink_id, drinks])
 
     function handleSubmit() {
-        console.log("successfully")
-        success()
-    }
-
-    const success = () => {
-        message.success('Welcome to the coffee shop!');
-    };
-    function handleInputChange(e) {
-        setNewUser({
-            ...newUser, [e.target.name]:e.target.value
-        })
+      fetch("http://localhost:9292/orders", {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newOrder)
+      })
+      .then((r) => r.json())
+      .then((data) => {
+          setOrders([...orders, data]);
+          setOpenSignup(false)
+      })
     }
     return (
     <>
@@ -41,81 +54,46 @@ const Shop = () => {
         </Button.Content>
     </Button>
     <Modal 
-        title="Customer Registration" 
-        open={openSignup}
-        onCancel={handleClose}
-        onOk={handleClose}
-        footer={null}
+      title="Order Form" 
+      open={openSignup}
+      onCancel={handleClose}
+      onOk={handleClose}
+      footer={null}
     >
-        <Form
-            name="registration"
-            labelCol={{span: 8}}
-            wrapperCol={{span: 16}}
-            style={{maxWidth: 600}}
-            autoComplete="off"
-            onFinish={handleSubmit}
-        >
-            <Form.Item
-                label="Drink Name"
-                name="name"
-                rules={[{required: true, message: 'Please select your drink!'}]}
-            >
-                <Input.Group compact onChange={handleInputChange}>
-                    <Select
-                        style={{
-                        width: '90%',
-                        }}
-                        defaultValue="Americano"
-                    >
-                        <Option value="Americano">Americano</Option>
-                        <Option value="Latte">Latte</Option>
-                        <Option value="Cappuccino">Cappuccino</Option>
-                        <Option value="Expresso">Expresso</Option>
-                        <Option value="Chai Tea">Chai Tea</Option>
-                        <Option value="Frutal Tea">Frutal Tea</Option>
-                        <Option value="Hot Chocolate">Hot Chocolate</Option>
-                        <Option value="Peppermint Hot Chocolate">Peppermint Hot Chocolate</Option>
-                        <Option value="Iced Sweet Tea">PIced Sweet Tea</Option>
-                        <Option value="Mango Iced Tea">Mango Iced Tea</Option>
-                        <Option value="Passion Fruit Beverage">Passion Fruit Beverage</Option>
-                        <Option value="Dragon Fruit Beverage">Dragon Fruit Beverage</Option>
-                    </Select>
-                    </Input.Group>
-            </Form.Item>
-            <Form.Item
-                label="Email"
-                name="email"
-                rules={[{ required: true, message: 'Please input your email!'}]}
-            >
-                <Radio.Group onChange={handleInputChange} >
-                    <Radio value={1}>A</Radio>
-                    <Radio value={2}>B</Radio>
-                    <Radio value={3}>C</Radio>
-                    <Radio value={4}>D</Radio>
-                </Radio.Group>
-            </Form.Item>
-            <Form.Item
-                label="Phone"
-                name="phone"
-                rules={[{ required: true,message: 'Please confirm your phone!'}]}
-            >
-                <Input name="phone" onChange={handleInputChange}  />
-            </Form.Item>
-            <Form.Item
-                label="Address"
-                name="address"
-                rules={[{required: true,message: 'Please input your address!'}]}
-            >
-                <Input name="address" onChange={handleInputChange} />
-            </Form.Item>
-            <Form.Item
-                wrapperCol={{offset: 5}}
-            >
-                <Button type="primary" htmlType="submit" className="login-form-button">
-                Register
-                </Button>
-            </Form.Item>
-        </Form>
+      <Form onSubmit={handleSubmit}>
+        <Form.Field required>
+            <select onChange={(e) => setCustomer_id(e.target.value)}>
+              <option>Select your name</option>
+              {customers.map((customer) => ( 
+              <option key={customer.id} value={customer.id}>
+                {customer.name}
+              </option>))}
+            </select>
+        </Form.Field>
+        <Form.Field required>
+            <select  onChange={(e) => setDrink_id(e.target.value)}>
+              <option>Select a Drink</option>
+              {drinks.map((drink) => ( 
+              <option key={drink.id} value={drink.id}>
+                {drink.name}
+              </option>))}
+            </select>
+        </Form.Field>
+        <Form.Field required>
+        <Radio.Group onChange={(e) => setTotal(e.target.value)} >
+            <Radio value={selectedDrinkPrice}>Small</Radio>
+            <Radio value={selectedDrinkPrice + 1}>Medium</Radio>
+            <Radio value={selectedDrinkPrice + 2}>Large</Radio>
+          </Radio.Group>
+        </Form.Field>
+
+      <Form.Field required>
+      <Descriptions size='default'>
+            <Descriptions.Item label="Total">${total}</Descriptions.Item>
+        </Descriptions>
+      </Form.Field>
+    <Button>Order</Button>
+  </Form>
     </Modal>
     </>
     )

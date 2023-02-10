@@ -323,6 +323,22 @@ border: 2px solid #FF9408;
 text-align: center;
 
 }
-.BtnShop{
-  
+.drink-form{
+  margin: 50px;
+  width: 90%;
+  text-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.btnDrink{
+color: #000000;
+background-color: #f4a261;
+border: solid #fa8124 2px;
+box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+border-radius: 50px;
+cursor: pointer;
+}
+
+
