@@ -5,24 +5,24 @@ import { useState } from 'react';
 const NewDrinkModal = ({drinks, setDrinks,drinkIngredients, setdrinkIngredients}) => {
     const [openSignup, setOpenSignup] = useState(false)
     const [newDrink, setNewDrink] = useState({
-        name: "",
-        price: "",
-        size: "small",
-        image_url:"",
+      name: "",
+      price: "",
+      size: "small",
+      image_url:"",
     })
 
     function handleOpen() {
-        setOpenSignup(true)
+      setOpenSignup(true)
     }
     function handleClose() {
-        setOpenSignup(false)
+      setOpenSignup(false)
     }
 
     function handleChange1(e) {
-        e.preventDefault()
-        setNewDrink({
-            ...newDrink, [e.target.name]:e.target.value
-        })
+      e.preventDefault()
+      setNewDrink({
+          ...newDrink, [e.target.name]:e.target.value
+      })
     }
     function handleSubmit() {
       fetch("http://localhost:9292/drinks", {
@@ -36,6 +36,7 @@ const NewDrinkModal = ({drinks, setDrinks,drinkIngredients, setdrinkIngredients}
         setOpenSignup(false)
         success();
       })
+      
     }
 
     const success = () => {
