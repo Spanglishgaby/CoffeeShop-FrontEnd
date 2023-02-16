@@ -1,15 +1,18 @@
-import { Modal, Form, Input,message,Button} from 'antd';
+import { Modal, message,} from 'antd';
+import { Button,Form, } from 'semantic-ui-react'
 import { useState } from 'react';
 
 
-const NewDrinkModal = ({drinks, setDrinks,drinkIngredients, setdrinkIngredients}) => {
+const NewDrinkModal = ({drinks, setDrinks,drinkIngredients, setdrinkIngredients,ingredients,setIngredients}) => {
     const [openSignup, setOpenSignup] = useState(false)
+    // const [ingredient_id, setIngredient_id] = useState("")
     const [newDrink, setNewDrink] = useState({
       name: "",
       price: "",
       size: "small",
       image_url:"",
     })
+    console.log(ingredients)
 
     function handleOpen() {
       setOpenSignup(true)
@@ -36,7 +39,6 @@ const NewDrinkModal = ({drinks, setDrinks,drinkIngredients, setdrinkIngredients}
         setOpenSignup(false)
         success();
       })
-      
     }
 
     const success = () => {
@@ -45,7 +47,7 @@ const NewDrinkModal = ({drinks, setDrinks,drinkIngredients, setdrinkIngredients}
     
   return (
     <>
-    <Button className='btnDrink' onClick={handleOpen}>Create a New Drink</Button>
+    <button className='btnDrink' onClick={handleOpen}>Create a New Drink</button>
     <Modal 
         title="Create a New Drink" 
         open={openSignup}
@@ -53,38 +55,20 @@ const NewDrinkModal = ({drinks, setDrinks,drinkIngredients, setdrinkIngredients}
         onOk={handleClose}
         footer={null}
     >
-      <Form
-          name="newDrink"
-          labelCol={{span: 8}}
-          wrapperCol={{span: 16}}
-          style={{maxWidth: 600}}
-          autoComplete="off"
-          onFinish={handleSubmit}
-      >
-          <Form.Item
-              label="Name"
-              name="name"
-              rules={[{required: true, message: 'Please input your drink!'}]}
-          >
-              <Input name="name" onChange={handleChange1}  />
-          </Form.Item>
-          <Form.Item
-              label="Price"
-              name="price"
-              rules={[{ required: true, message: 'Please input the price!'}]}
-          >
-              <Input name="price" onChange={handleChange1}  />
-          </Form.Item>
-          <Form.Item
-              label="Image"
-              name="image_url"
-              rules={[{ required: true,message: 'Please input the image url!'}]}
-          >
-              <Input name="image_url" onChange={handleChange1}  />
-          </Form.Item>
-          <Form.Item wrapperCol={{offset: 5}}>
-            <Button type="primary" htmlType="submit" >Create</Button>
-          </Form.Item>
+      <Form onSubmit={handleSubmit}>
+        <Form.Field required>
+          <label>Please input the name!</label>
+          <input name="name" onChange={handleChange1}  />
+        </Form.Field>
+        <Form.Field required>
+          <label>Please input the price!</label>
+          <input name="price" onChange={handleChange1}  />
+        </Form.Field>
+        <Form.Field required>
+          <label>Please input the image url!</label>
+          <input name="image_url" onChange={handleChange1}  />
+        </Form.Field>
+        <Button primary>Create</Button>
       </Form>
     </Modal>
     </>

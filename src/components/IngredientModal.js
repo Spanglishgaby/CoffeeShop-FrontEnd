@@ -40,7 +40,7 @@ const IngredientModal = ({ingredients,setIngredients}) => {
   };
   return (
     <>
-    <Button className='btnDrink' onClick={handleOpen}>Create a New Ingredient</Button>
+    <button className='btnDrink' onClick={handleOpen}>Create a New Ingredient</button>
     <Modal 
         title="Create a New Ingredients" 
         open={openSignup}

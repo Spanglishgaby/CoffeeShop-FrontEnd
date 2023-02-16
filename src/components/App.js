@@ -11,7 +11,7 @@ function App() {
   const [orders, setOrders] =useState([])
   const [customers, setCustomers] =useState([])
   const [ingredients, setIngredients] =useState([])
-  const [drinkIngredients, setdrinkIngredients] =useState([])
+
 
   useEffect(() => {
     const fetchData = async () => {
