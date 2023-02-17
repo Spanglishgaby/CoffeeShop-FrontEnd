@@ -37,7 +37,7 @@ npm start
 Setup to use port 8080 (http://localhost:8080/) and use an API on port 9292
 
 ## Features
-###App
+### App
 * Customized Landing Page
 * Unique Design and Logo
 * Use of Semantic UI Forms and other Design Elements
@@ -45,13 +45,13 @@ Setup to use port 8080 (http://localhost:8080/) and use an API on port 9292
 * Nested Routes and Navigation
 * Ability to Create a New Customer
  
-###Drinks
+### Drinks
 * Ability to Create, Update, and Delete a Drink
 * Ability to Create and Add Ingredients to a Drink
 * Ability to Show All Drinks in the Menu Tab
 * Ability to Show the Relationship Drink-Drink Ingredients-Ingredients 
 
-###Orders
+### Orders
 * Ability to Create and Delete an Order
 * Ability to Show All Orders in the Orders Tab
 * Ability to Show the Relationship Drink-Order-Customer
