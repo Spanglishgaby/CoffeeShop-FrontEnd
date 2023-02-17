@@ -58,7 +58,7 @@ function App() {
     <Route path = '/mainpage' element={<Mainpage customers={customers} setCustomers={setCustomers}/>}>
       <Route path = 'menu' element={<MenuContainer drinks={drinks} setOrders={setOrders} orders={orders} customers={customers}/>}/>
       <Route path = 'drinks' element={<DrinksContainer drinks={drinks} setDrinks={setDrinks} ingredients={ingredients} setIngredients={setIngredients}/>}/>
-      <Route path = 'orders' element={<OrdersContainer orders={orders} setOrders={setOrders} customers={customers} />}/>
+      <Route path = 'orders' element={<OrdersContainer orders={orders} setOrders={setOrders} customers={customers} drinks={drinks}/>}/>
     </Route>
   </Routes>
   );

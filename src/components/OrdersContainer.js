@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button,Card} from 'semantic-ui-react'
 
-const OrdersContainer = ({orders,setOrders,customers}) => {
+const OrdersContainer = ({orders,setOrders,customers, drinks}) => {
 
   const handleDelete = (id) =>
     setOrders((current) => current.filter((p) => p.id !== id));
@@ -17,7 +17,8 @@ const OrdersContainer = ({orders,setOrders,customers}) => {
       })
   }
   let orderArray = orders && orders.map((order) => {
-    let customer = customers.find(customer => customer.id === order.customer_id)
+    let customer = customers.find(customer => customer.id === order.customer_id);
+    let drink = drinks.find(drink => drink.id === order.drink_id);
     
     return (
       <>
@@ -26,7 +27,7 @@ const OrdersContainer = ({orders,setOrders,customers}) => {
           Order #:{order.id}
           <Card.Header> {customer.name}</Card.Header>
           <Card.Description>
-          <strong>Ingredients:</strong>Steve wants to add you to the group 
+          <strong>Drink Ordered: </strong>{drink.name}
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
